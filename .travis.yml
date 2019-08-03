@@ -1,0 +1,26 @@
+dist: bionic
+sudo: required
+
+env:
+  matrix:
+    - SUITE=sid ARCH=amd64
+
+matrix:
+  fast_finish: true
+
+branches:
+  only:
+    - master
+
+before_install:
+  - echo "deb http://archive.ubuntu.com/ubuntu/ devel main universe"
+        | sudo tee /etc/apt/sources.list.d/devel.list
+  - sudo apt-get update --quiet
+  - sudo apt-get install --no-install-recommends --yes
+        autopkgtest
+        qemu-system
+        qemu-utils
+        vmdb2
+
+script:
+  - sudo autopkgtest-build-qemu $SUITE autopkgtest.img
