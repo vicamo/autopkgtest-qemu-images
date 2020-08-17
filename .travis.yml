@@ -1,9 +1,18 @@
-dist: bionic
+dist: focal
 sudo: required
 
 env:
   matrix:
-    - SUITE=sid ARCH=amd64
+    - SUITE=bionic MIRROR=http://archive.ubuntu.com/ubuntu
+    - SUITE=bullseye
+    - SUITE=buster
+    - SUITE=focal MIRROR=http://archive.ubuntu.com/ubuntu
+    - SUITE=groovy MIRROR=http://archive.ubuntu.com/ubuntu
+    - SUITE=jessie
+    - SUITE=sid
+    - SUITE=stretch
+    - SUITE=trusty MIRROR=http://archive.ubuntu.com/ubuntu
+    - SUITE=xenial MIRROR=http://archive.ubuntu.com/ubuntu
 
 matrix:
   fast_finish: true
@@ -23,4 +32,4 @@ before_install:
         vmdb2
 
 script:
-  - sudo autopkgtest-build-qemu $SUITE autopkgtest.img
+  - sudo autopkgtest-build-qemu $SUITE autopkgtest-$SUITE.img $MIRROR
