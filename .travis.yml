@@ -1,4 +1,4 @@
-dist: bionic
+dist: focal
 sudo: required
 
 env:
@@ -13,8 +13,6 @@ branches:
     - master
 
 before_install:
-  - echo "deb http://archive.ubuntu.com/ubuntu/ devel main universe"
-        | sudo tee /etc/apt/sources.list.d/devel.list
   - sudo apt-get update --quiet
   - sudo apt-get install --no-install-recommends --yes
         autopkgtest
